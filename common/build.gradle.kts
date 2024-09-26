@@ -1,9 +1,9 @@
-import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
+import com.varabyte.kobweb.gradle.library.util.configAsKobwebLibrary
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.kobweb.application)
+    alias(libs.plugins.kobweb.library)
     alias(libs.plugins.kobwebx.markdown)
     alias(libs.plugins.serialization.plugin)
 }
@@ -11,20 +11,13 @@ plugins {
 group = "com.alphaomardiallo.portofolio"
 version = "1.0-SNAPSHOT"
 
-kobweb {
-    app {
-        index {
-            description.set("Powered by Kobweb")
-        }
-    }
-}
-
 kotlin {
-    configAsKobwebApplication("portofolio", includeServer = true)
+    configAsKobwebLibrary(includeServer = true)
 
     sourceSets {
         commonMain.dependencies {
             implementation(libs.compose.runtime)
+            implementation(libs.kotlinx.serialization)
         }
 
         jsMain.dependencies {
